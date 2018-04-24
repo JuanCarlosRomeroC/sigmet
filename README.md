@@ -7,10 +7,10 @@ Todo esta incluido y listo para usar, espero sea de utilidad.
 
 
 ## Vision General :mag:
-Menu Principal
+Menú principal
 ![](https://raw.githubusercontent.com/delfinworks/Sigme/master/images/sigme1.jpg)
 
-Modulo de Carga
+Módulo de Carga 
 ![](https://raw.githubusercontent.com/delfinworks/Sigme/master/images/sigme2.jpg)
 
 ## Requerimiento :white_check_mark:
@@ -19,8 +19,7 @@ Modulo de Carga
 - MySQL 5.1.46
 - phpMyAdmin 3.3.3 
 
-## PHP :gear:
-
+## PHP :eyes:
 ```bash
 public function Clase_RendirEje() 
  {
@@ -33,8 +32,7 @@ public function Clase_RendirEje()
  }
 ```
 
-## PL/SQL :gear:
-
+## PL/SQL :eyes:
 ```bash
 CREATE DEFINER=`root`@`localhost` PROCEDURE `rendir` (`v_eje` INT, `v_users` VARCHAR(8), `v_ip` VARCHAR(20))  BEGIN
         DECLARE    v_id_generado int(8);
