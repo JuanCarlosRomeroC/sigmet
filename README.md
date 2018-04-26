@@ -2,7 +2,7 @@ English | [Español](./README.es-US.md)
 
 
 # Sigmet
-System of monitoring and control of objectives,is a project made in PHP using the software architecture pattern MVC. Will serve for that person who wants to learn the methodology. The PL / SQL programming language was used to manage the information in MySQL for better control of the data. The ADOdb library set was also implemented to provide more portability, speed and ease of connections. The system also manages email and PDF libraries for the generation of reports.
+System of monitoring and control of objectives, is a project made in PHP using the software architecture pattern MVC. Will serve for that person who wants to learn the methodology. The PL / SQL programming language was used to manage the information in MySQL for better control of the data. The ADOdb library set was also implemented to provide more portability, speed and ease of connections. The system also manages email and PDF libraries for the generation of reports.
 
 Everything is included and ready to use, I hope it will be useful.
 
