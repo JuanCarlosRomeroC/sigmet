@@ -1,4 +1,4 @@
-[English](./README.es-US.md) | Español
+[English](./README.md) | Español
 
 
 # Sigme
