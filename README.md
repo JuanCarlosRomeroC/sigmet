@@ -1,22 +1,19 @@
 English | [Español](./README.es-US.md)
 
 
-# Sigme
-Sistema de seguimiento y control de metas, es un proyecto realizado en PHP usando la patrón de arquitectura de software MVC que servirá de base para aquella persona que quiera aprender la metodología. Para el manejo de la información se uso PL/SQL en MySQL para un mejor control de los datos. Se usaron también el  conjunto de bibliotecas ADOdb para brindar mas portabilidad, rapidez y facilidad en las conexiones. El sistema también maneja librerías de Email y de PDF para la generación de reportes.
+# Sigmet
+System of monitoring and control of objectives,is a project made in PHP using the software architecture pattern MVC. Will serve for that person who wants to learn the methodology. The PL / SQL programming language was used to manage the information in MySQL for better control of the data. The ADOdb library set was also implemented to provide more portability, speed and ease of connections. The system also manages email and PDF libraries for the generation of reports.
 
+Everything is included and ready to use, I hope it will be useful.
 
+## Overview :mag:
+Main menu
+![](https://raw.githubusercontent.com/delfinworks/sigmet/master/images/sigme1.jpg)
 
-Todo esta incluido y listo para usar, espero sea de utilidad.
+Load Module
+![](https://raw.githubusercontent.com/delfinworks/sigmet/master/images/sigme2.jpg)
 
-
-## Vision General :mag:
-Menú principal
-![](https://raw.githubusercontent.com/delfinworks/Sigme/master/images/sigme1.jpg)
-
-Módulo de Carga 
-![](https://raw.githubusercontent.com/delfinworks/Sigme/master/images/sigme2.jpg)
-
-## Requerimiento :white_check_mark:
+## Usage :white_check_mark:
 - Web Server Apache-2.2.15
 - PHP 5.2.13
 - MySQL 5.1.46
@@ -27,9 +24,9 @@ Módulo de Carga
 public function Clase_RendirEje() 
  {
     if ($this->error!="")return $array=array(false,$this->error,0);
-    $SQL = "call rendir ('$this->eje', '".$_SESSION['seniat_users_id_sigme']."', '".$_SERVER['REMOTE_ADDR']."')";
+    $SQL = "call rendir ('$this->eje', '".$_SESSION['users_id_sigme']."', '".$_SERVER['REMOTE_ADDR']."')";
     $db=DB_CONECCION();
-    $rs = $db->Execute($SQL) or die("Error guardando");
+    $rs = $db->Execute($SQL) or die("Error saving");
     $db->close();
     return $array=array($rs->fields[0],utf8_decode($rs->fields[1]),$rs->fields[2]);
  }
@@ -45,13 +42,13 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `rendir` (`v_eje` INT, `v_users` VAR
 
         IF EXISTS(SELECT rindio FROM safor_pry_ae_eje_um WHERE id_eje=v_eje AND rindio=0) THEN
                 SET v_id_generado= v_eje;
-                SET v_mensaje='Disculpe pero hay unidades de medida en acciones especificas que faltan por rendir';
+                SET v_mensaje='Excuse me but there are units of measurement in specific actions that are still pending';
                 SET v_valor=true;
 
         ELSE
                 IF EXISTS(SELECT rindio FROM safor_pry_ae_ai_eje_um WHERE id_eje=v_eje AND rindio=0) THEN
                         SET v_id_generado= v_eje;
-                        SET v_mensaje='Disculpe pero hay unidades de medida en acciones intermedias que faltan por rendir';
+                        SET v_mensaje='Excuse me but there are units of measure in intermediate actions that are still pending';
                         SET v_valor=true;
 
                 ELSE
@@ -59,46 +56,45 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `rendir` (`v_eje` INT, `v_users` VAR
                                 WHERE id_eje=v_eje;
 
                         SET v_id_generado= v_eje;
-                        SET v_mensaje='La unidad ejecutora se rindio exitosamente';
+                        SET v_mensaje='The executing unit successfully surrendered';
                         SET v_valor=true;
 
                 END IF;
         END IF;
 
-        INSERT INTO seniat_users_log (id, ip, accion, valor, id_eje)
+        INSERT INTO users_log (id, ip, accion, valor, id_eje)
                 VALUES (v_users, v_ip, v_mensaje, '', v_eje);
 
         select  v_id_generado as id,v_mensaje as mensaje,v_valor as valor;
 END$$
 ```
 
-## Configuración :gear:
+## Configuration :gear:
 
 ****************************************************************************************
-Los archivos de configuración de la aplicación se encuentran en el directorio "includes".
+The configuration files of the application are in the "includes" directory.
 ****************************************************************************************
 ```bash
-/* Constantes de base de datos "configuracion_db.php" */
-define('DB_TYPE','mysql');//manejador de base de datos
-define('DB_SERVIDOR', '127.0.0.1'); //Dirección IP del servidor de base de datos
-define('DB_SERVIDOR_PUERTO', '3306'); // Puerto de conexión de base de datos
-define('DB_SERVIDOR_USERNAME', 'user'); // Usuario de conexión de base de datos
-define('DB_SERVIDOR_PASSWORD', 'password); // Password de conexión de base de datos
-define('DB_DATABASE', ' sigme'); //Nombre de la base de datos
-define('DB_CONEXION_P', false);  // Usar conexiones persistentes?
-define('DEBUG_ADODB', false); // Opción para que la Clase ADODB muestre los errores arrojados
+/* Database constants "configuracion_db.php" */
+define('DB_TYPE','mysql'); //Database manager
+define('DB_SERVIDOR', '127.0.0.1'); // IP address of the database server
+define('DB_SERVIDOR_PUERTO', '3306'); // Database connection port
+define('DB_SERVIDOR_USERNAME', 'user'); // Database connection user
+define('DB_SERVIDOR_PASSWORD', 'password); // Database connection password
+define('DB_DATABASE', ' sigme'); //Database name
+define('DB_CONEXION_P', false);  // Use persistent connections??
+define('DEBUG_ADODB', false); // Option for the ADODB Class to show the errors thrown
 ```
 ```bash
-/* Constantes de rutas del sistema "configuracion.php" */
+/* System routing constants "configuracion.php" */
 define('DOCUMENT_ROOT',$_SERVER['DOCUMENT_ROOT']);
-define('PATH',$_SERVER['DOCUMENT_ROOT']. '/sigme''); // 'Coloca aquí la ruta donde se encuentra el sistema a partir del directorio raíz
+define('PATH',$_SERVER['DOCUMENT_ROOT']. '/sigme''); // 'Place the path where the system is located from the root directory
 ```
 
-Montar la base datos db/sigme.sql
+Mount database db/sigme.sql
 
-Listo!
+Ready!
 
+## Compatibility :triangular_ruler:
 
-## Compatibilidad :triangular_ruler:
-
-Exploradores modernos y IE11.
+Modern browsers and IE11.
