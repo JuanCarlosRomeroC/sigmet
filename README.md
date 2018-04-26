@@ -1,3 +1,6 @@
+English | [Español](./README.es-US.md)
+
+
 # Sigme
 Sistema de seguimiento y control de metas, es un proyecto realizado en PHP usando la patrón de arquitectura de software MVC que servirá de base para aquella persona que quiera aprender la metodología. Para el manejo de la información se uso PL/SQL en MySQL para un mejor control de los datos. Se usaron también el  conjunto de bibliotecas ADOdb para brindar mas portabilidad, rapidez y facilidad en las conexiones. El sistema también maneja librerías de Email y de PDF para la generación de reportes.
 
