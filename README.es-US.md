@@ -1,7 +1,7 @@
 [English](./README.md) | Español
 
 
-# Sigme
+# Sigmet
 Sistema de seguimiento y control de metas, es un proyecto realizado en PHP usando la patrón de arquitectura de software MVC que servirá de base para aquella persona que quiera aprender la metodología. Para el manejo de la información se uso PL/SQL en MySQL para un mejor control de los datos. Se usaron también el  conjunto de bibliotecas ADOdb para brindar mas portabilidad, rapidez y facilidad en las conexiones. El sistema también maneja librerías de Email y de PDF para la generación de reportes.
 
 
@@ -11,10 +11,10 @@ Todo esta incluido y listo para usar, espero sea de utilidad.
 
 ## Vision General :mag:
 Menú principal
-![](https://raw.githubusercontent.com/delfinworks/Sigme/master/images/sigme1.jpg)
+![](https://raw.githubusercontent.com/delfinworks/sigmet/master/images/sigme1.jpg)
 
 Módulo de Carga 
-![](https://raw.githubusercontent.com/delfinworks/Sigme/master/images/sigme2.jpg)
+![](https://raw.githubusercontent.com/delfinworks/sigmet/master/images/sigme2.jpg)
 
 ## Requerimiento :white_check_mark:
 - Web Server Apache-2.2.15
@@ -27,7 +27,7 @@ Módulo de Carga
 public function Clase_RendirEje() 
  {
     if ($this->error!="")return $array=array(false,$this->error,0);
-    $SQL = "call rendir ('$this->eje', '".$_SESSION['seniat_users_id_sigme']."', '".$_SERVER['REMOTE_ADDR']."')";
+    $SQL = "call rendir ('$this->eje', '".$_SESSION['users_id_sigme']."', '".$_SERVER['REMOTE_ADDR']."')";
     $db=DB_CONECCION();
     $rs = $db->Execute($SQL) or die("Error guardando");
     $db->close();
@@ -65,7 +65,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `rendir` (`v_eje` INT, `v_users` VAR
                 END IF;
         END IF;
 
-        INSERT INTO seniat_users_log (id, ip, accion, valor, id_eje)
+        INSERT INTO users_log (id, ip, accion, valor, id_eje)
                 VALUES (v_users, v_ip, v_mensaje, '', v_eje);
 
         select  v_id_generado as id,v_mensaje as mensaje,v_valor as valor;
